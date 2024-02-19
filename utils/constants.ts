@@ -10,7 +10,7 @@ export const RPC_URL_ARBITRUM: string = process.env.RPC_URL_ARBITRUM!
 export const TENDERLY_ACCESS_TOKEN: string = process.env.TENDERLY_ACCESS_TOKEN!
 export const TENDERLY_USER: string = process.env.TENDERLY_USER!
 export const TENDERLY_PROJECT_SLUG: string = process.env.TENDERLY_PROJECT_SLUG!
-
+export const DISCORD_WEBHOOK_URL: string = process.env.DISCORD_WEBHOOK_URL!
 // Validate them.
 if (!ETHERSCAN_API_KEY) throw new Error('ETHERSCAN_API_KEY is not defined')
 if (!RPC_URL_MAINNET) throw new Error('RPC_URL_MAINNET is not defined')

@@ -4,7 +4,8 @@ import fs from 'fs'
 import { CometChains, SymbolAndDecimalsLookupData } from '../compound-types'
 import { customProvider } from './../../../utils/clients/ethers'
 import { getContractNameAndAbiFromFile } from './../abi-utils'
-import mftch from 'micro-ftch'
+import { DISCORD_WEBHOOK_URL } from './../../../utils/constants'
+import mftch, { FETCH_OPT } from 'micro-ftch'
 // @ts-ignore
 const fetchUrl = mftch.default
 
@@ -226,4 +227,29 @@ export async function formatAddressesAndAmounts(list: string[], chain: CometChai
   }
   const results = await Promise.all(promises)
   return results.join(', ')
+}
+
+export async function postToDiscord(summary: string) {
+  const message = {
+    content: summary,
+  }
+
+  // const fetchOptions = <Partial<FETCH_OPT>>{ method: 'POST', type:'json' headers: { 'Content-Type': 'application/json' }, data: JSON.stringify(message) }
+  const fetchOptions: Partial<FETCH_OPT> = {
+    method: 'POST',
+    type: 'json',
+    headers: { 'Content-Type': 'application/json' },
+    data: message,
+  }
+  try {
+    const response = await fetchUrl(DISCORD_WEBHOOK_URL, fetchOptions)
+
+    if (response) {
+      console.log('Successfully posted summary to Discord.')
+    } else {
+      console.error('Failed to post summary to Discord.', response.status)
+    }
+  } catch (error) {
+    console.error('Error posting to Discord:', error)
+  }
 }

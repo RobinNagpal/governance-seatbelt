@@ -13,6 +13,7 @@ import { unified } from 'unified'
 import { mdToPdf } from 'md-to-pdf'
 import { formatProposalId } from '../utils/contracts/governor'
 import { AllCheckResults, GovernorType, ProposalEvent } from '../types'
+import { postToDiscord } from '../checks/compound/formatters/helper'
 
 // --- Markdown helpers ---
 
@@ -197,7 +198,7 @@ ${Object.keys(checks)
   .map((checkId) => toCheckSummary(checks[checkId]))
   .join('\n')}
 `
-
+  await postToDiscord(report)
   // Add table of contents and return report.
   return (await remark().use(remarkToc, { tight: true }).process(report)).toString()
 }
