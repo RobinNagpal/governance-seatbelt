@@ -250,7 +250,7 @@ export async function postToDiscord(summary: string) {
   } catch (error) {
     console.error('Error posting to Discord:', error)
   }
-
+}
 export function formatAddressesAndAmounts(addressesList: string[], amountsList: string[], platform: string) {
   const results = []
   for (let i = 0; i < addressesList.length; i += 1) {
