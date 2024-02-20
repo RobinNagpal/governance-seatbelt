@@ -234,10 +234,8 @@ export async function postToDiscord(summary: string) {
     content: summary,
   }
 
-  // const fetchOptions = <Partial<FETCH_OPT>>{ method: 'POST', type:'json' headers: { 'Content-Type': 'application/json' }, data: JSON.stringify(message) }
-  const fetchOptions: Partial<FETCH_OPT> = {
+  const fetchOptions = <Partial<FETCH_OPT>>{
     method: 'POST',
-    type: 'json',
     headers: { 'Content-Type': 'application/json' },
     data: message,
   }
